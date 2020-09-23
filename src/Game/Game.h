@@ -7,15 +7,17 @@
 #include "../EventBus/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
 
-inline constexpr unsigned int FPS = 15;
+inline constexpr unsigned int FPS = 60;
 inline constexpr unsigned int MILLISECS_PER_FRAME = 1000 / FPS;
 
 class Game {
     private:
         bool isRunning;
+        bool showBoundingBox;
         int ticksPreviousFrame;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        SDL_Rect camera;
 
         std::unique_ptr<AssetStore> assetStore;
         std::unique_ptr<Registry> registry;
@@ -37,6 +39,8 @@ class Game {
 
         static int windowWidth;
         static int windowHeight;
+        static int mapWidth;
+        static int mapHeight;
 };
 
 #endif

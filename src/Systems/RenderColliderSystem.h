@@ -18,16 +18,17 @@ class RenderColliderSystem: public System {
             
         }
 
-        void Update(std::unique_ptr<Registry>& registry, SDL_Renderer* renderer) {
+        void Update(std::unique_ptr<Registry>& registry, SDL_Renderer* renderer, SDL_Rect& camera) {
             for (auto entity: GetSystemEntities()) {
                 const TransformComponent transform = entity.GetComponent<TransformComponent>();
                 const BoxColliderComponent collider = entity.GetComponent<BoxColliderComponent>();
 
+                // Draw a red bounding box around entities that collide
                 SDL_Rect boxColliderRectangle = {
-                    static_cast<int>(transform.position.x + collider.offset.x),
-                    static_cast<int>(transform.position.y + collider.offset.y),
-                    static_cast<int>(collider.width),
-                    static_cast<int>(collider.height)
+                    static_cast<int>(transform.position.x + collider.offset.x - camera.x),
+                    static_cast<int>(transform.position.y + collider.offset.y - camera.y),
+                    static_cast<int>(collider.width * transform.scale.x),
+                    static_cast<int>(collider.height * transform.scale.y)
                 };
                 SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
                 SDL_RenderDrawRect(renderer, &boxColliderRectangle);

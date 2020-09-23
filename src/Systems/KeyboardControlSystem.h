@@ -70,7 +70,7 @@ class KeyboardControlSystem: public System {
             // }
         }
 
-        void Update(std::unique_ptr<Registry>& registry, double deltaTime) {
+        void Update(std::unique_ptr<Registry>& registry) {
             
         }
 };

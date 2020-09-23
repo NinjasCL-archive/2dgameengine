@@ -24,7 +24,7 @@ class RenderSystem: public System {
             
         }
 
-        void Update(std::unique_ptr<Registry>& registry, SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore) {
+        void Update(std::unique_ptr<Registry>& registry, SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore, SDL_Rect& camera) {
             // Sort entities by zIndex
             std::vector<RenderableEntity> renderableEntities;
             for (auto entity: GetSystemEntities()) {
@@ -44,10 +44,10 @@ class RenderSystem: public System {
                 // Set the source rectangle of our original sprite texture
                 SDL_Rect srcRect = sprite.srcRect;
 
-                // Set the destination rectangle in the x,y position in the renderer
+                // Set the destination rectangle in the x,y position in the renderer considering the camera position
                 SDL_Rect dstRect = {
-                    static_cast<int>(transform.position.x),
-                    static_cast<int>(transform.position.y),
+                    static_cast<int>(transform.position.x - (sprite.isFixed ? 0 : camera.x)),
+                    static_cast<int>(transform.position.y - (sprite.isFixed ? 0 : camera.y)),
                     static_cast<int>(sprite.width * transform.scale.x),
                     static_cast<int>(sprite.height * transform.scale.y)
                 };

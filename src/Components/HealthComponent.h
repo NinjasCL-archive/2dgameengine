@@ -1,5 +1,5 @@
-#ifndef HEALTH_COMPONENT
-#define HEALTH_COMPONENT
+#ifndef HEALTHCOMPONENT_H
+#define HEALTHCOMPONENT_H
 
 class HealthComponent {
     public:

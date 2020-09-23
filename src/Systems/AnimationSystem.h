@@ -18,7 +18,7 @@ class AnimationSystem: public System {
             
         }
 
-        void Update(std::unique_ptr<Registry>& registry, double deltaTime) {
+        void Update(std::unique_ptr<Registry>& registry) {
             for (auto entity: GetSystemEntities()) {
                 AnimationComponent& animation = entity.GetComponent<AnimationComponent>();
                 SpriteComponent& sprite = entity.GetComponent<SpriteComponent>();

@@ -16,17 +16,17 @@ class DamageSystem: public System {
             eventBus->ListenToEvent<CollisionEvent>(this, &DamageSystem::OnCollision);
         }
 
-        void Update(std::unique_ptr<Registry>& registry) {
-        
-        }
-
         void OnCollision(CollisionEvent& event) {
             Entity a = event.a;
             Entity b = event.b;
             std::cout << "Damage system detected collision between entity " << a.GetId() << " and " << b.GetId() << std::endl;
             
-            a.Kill();
-            b.Kill();
+            // a.Kill();
+            // b.Kill();
+        }
+
+        void Update(std::unique_ptr<Registry>& registry) {
+        
         }
 };
 
